@@ -1,0 +1,27 @@
+{
+  "name": "ml-back",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon index.js",
+    "lint": "eslint .",
+    "migrate": "./node_modules/.bin/knex migrate:latest"
+  },
+  "author": "Alan Ramirez",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "eslint": "^6.7.2",
+    "eslint-config-airbnb-base": "^14.0.0",
+    "eslint-plugin-import": "^2.18.2",
+    "express": "^4.17.1",
+    "express-joi-validation": "^4.0.3",
+    "joi": "^14.3.1",
+    "knex": "^0.20.15",
+    "nodemon": "^2.0.1",
+    "pg": "^8.2.1"
+  }
+}
