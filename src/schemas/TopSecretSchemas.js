@@ -9,7 +9,6 @@ const topSecretSchema = Joi.object().keys({
 });
 
 const topSecretSplitSchema = Joi.object().keys({
-  name: Joi.string().required(),
   distance: Joi.number().min(0).required(),
   message: Joi.array().items(Joi.string().allow('').required()).required(),
 });

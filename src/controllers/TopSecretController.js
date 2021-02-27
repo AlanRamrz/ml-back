@@ -19,6 +19,20 @@ TopSecretController.getTopSecretSplit = async (req, res, next) => {
   }
 };
 
+TopSecretController.topSecretSplit = (req, res, next) => {
+  try {
+    const { params, body } = req;
+    const { satelliteName } = params;
+    logger(`TopSecretController.topSecretSplit with satellite ${satelliteName} and body ${JSON.stringify(body)}`);
+
+    const data = TopSecretService.topSecretSplit(satelliteName.toUpperCase(), body);
+
+    return res.status(201).send(data);
+  } catch (error) {
+    return next(error);
+  }
+};
+
 TopSecretController.topSecret = async (req, res, next) => {
   try {
     const { satellites: satellitesInput } = req.body;

@@ -3,6 +3,7 @@ const ROUTES = {
   CACHE: '/cache',
   TOP_SECRET: '/topsecret',
   GET_TOP_SECRET_SPLIT: '/topsecret_split',
+  TOP_SECRET_SPLIT: '/topsecret_split/:satelliteName',
 };
 
 const SATELLITES = {

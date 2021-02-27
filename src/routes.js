@@ -18,6 +18,11 @@ router.get(
   TopSecretController.getTopSecretSplit,
 );
 router.post(
+  ROUTES.TOP_SECRET_SPLIT,
+  validator.body(topSecretSplitSchema, { passError: true }),
+  TopSecretController.topSecretSplit,
+);
+router.post(
   ROUTES.TOP_SECRET,
   validator.body(topSecretSchema, { passError: true }),
   TopSecretController.topSecret,

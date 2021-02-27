@@ -29,7 +29,7 @@ const getMessage = (kenobiMessage, skywalkerMessage, satoMessage) => {
       res[i] = sanitizedKenobi[i] || sanitizedSkywalker[i] || sanitizedSato[i];
     }
 
-    return res.join(' ');
+    return res.join(' ').trim();
   } catch (error) {
     logger(`[ERROR] at getMessage -> ${error}`);
 
@@ -46,7 +46,8 @@ const getLocation = async (kenobiDistance, skywalkerDistance, satoDistance) => {
       EquationMapper.mapPointDistance(SATO, satoDistance),
     ];
 
-    logger('Start Wolfram Request...');
+
+    logger(`Start Wolfram Request with input ${equations}`);
     const wolframRes = await WolframClient.fullResult(equations.join(','));
     logger(`Wolfram response -> ${JSON.stringify(wolframRes)}`);
 
@@ -74,6 +75,12 @@ TopSecretService.getTopSecretSplit = async () => {
   const position = await getLocation(KENOBI_DATA.distance, SKYWALKER_DATA.distance, SATO_DATA.distance);
 
   return { message, position };
+};
+
+TopSecretService.topSecretSplit = (satelliteName, data) => {
+  CACHE[`${satelliteName}_DATA`] = data;
+
+  return CACHE;
 };
 
 TopSecretService.topSecret = (kenobi, skywalker, sato) => {
