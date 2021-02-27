@@ -5,8 +5,19 @@ const TopSecretService = require('../services/TopSecretService');
 
 const logger = console.log;
 
-TopSecretController.getCache = async (req, res) => res.send(TopSecretService.getCache());
-TopSecretController.deleteCache = async (req, res) => res.status(204).send(TopSecretService.deleteCache());
+TopSecretController.getCache = (req, res) => res.send(TopSecretService.getCache());
+TopSecretController.deleteCache = (req, res) => res.status(204).send(TopSecretService.deleteCache());
+
+TopSecretController.getTopSecretSplit = async (req, res, next) => {
+  try {
+    logger('TopSecretController.getTopSecretSplit');
+    const data = await TopSecretService.getTopSecretSplit();
+
+    return res.send(data);
+  } catch (error) {
+    return next(error);
+  }
+};
 
 TopSecretController.topSecret = async (req, res, next) => {
   try {

@@ -2,6 +2,7 @@ const ROUTES = {
   HEALTH: '/healthcheck',
   CACHE: '/cache',
   TOP_SECRET: '/topsecret',
+  GET_TOP_SECRET_SPLIT: '/topsecret_split',
 };
 
 const SATELLITES = {

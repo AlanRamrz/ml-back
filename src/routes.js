@@ -1,6 +1,6 @@
 const express = require('express');
 const validator = require('express-joi-validation').createValidator({});
-const { topSecretSchema } = require('./schemas/TopSecretSchemas');
+const { topSecretSchema, topSecretSplitSchema } = require('./schemas/TopSecretSchemas');
 const TopSecretController = require('./controllers/TopSecretController');
 
 const { ROUTES } = require('./utils/Constants');
@@ -8,9 +8,15 @@ const { ROUTES } = require('./utils/Constants');
 const router = express.Router();
 router.get(ROUTES.HEALTH, (req, res) => res.send({ status: 'OK' }));
 
+// CACHE ROUTES
 router.get(ROUTES.CACHE, TopSecretController.getCache);
 router.delete(ROUTES.CACHE, TopSecretController.deleteCache);
 
+// TOP SECRET ROUTES
+router.get(
+  ROUTES.GET_TOP_SECRET_SPLIT,
+  TopSecretController.getTopSecretSplit,
+);
 router.post(
   ROUTES.TOP_SECRET,
   validator.body(topSecretSchema, { passError: true }),
