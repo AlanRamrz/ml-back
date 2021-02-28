@@ -24,7 +24,13 @@ const SATELLITES = {
   },
 };
 
+const HEADERS = {
+  API_KEY: 'api-key',
+  AUTHENTICATION: 'authentication',
+};
+
 module.exports = {
   ROUTES,
   SATELLITES,
+  HEADERS,
 };
