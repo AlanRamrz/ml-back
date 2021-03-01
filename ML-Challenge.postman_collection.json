@@ -1,0 +1,215 @@
+{
+	"info": {
+		"_postman_id": "82f5fa26-184d-47fc-902d-49ad3511b627",
+		"name": "ML-Challenge",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Health",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{host}}/api/ml-back/healthcheck",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"ml-back",
+						"healthcheck"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Cache status",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "api-key",
+						"value": "{{ml_api_key}}",
+						"type": "text"
+					},
+					{
+						"key": "authentication",
+						"value": "{{ml_auth}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{host}}/api/ml-back/cache",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"ml-back",
+						"cache"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Top secret split",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "api-key",
+						"value": "{{ml_api_key}}",
+						"type": "text"
+					},
+					{
+						"key": "authentication",
+						"value": "{{ml_auth}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{host}}/api/ml-back/topsecret_split",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"ml-back",
+						"topsecret_split"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Cache",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "api-key",
+						"value": "{{ml_api_key}}",
+						"type": "text"
+					},
+					{
+						"key": "authentication",
+						"value": "{{ml_auth}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{host}}/api/ml-back/cache",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"ml-back",
+						"cache"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Top Secret",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "api-key",
+						"value": "{{ml_api_key}}",
+						"type": "text"
+					},
+					{
+						"key": "authentication",
+						"value": "{{ml_auth}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"satellites\": [\n        {\n        \t\"name\": \"kenobi\",\n        \t\"distance\": 100.0,\n        \t\"message\": [\"este\",\"\",\"\",\"mensaje\", \"\", \"\", \"\"]\n        },\n        {\n        \t\"name\": \"SKYWALKER\",\n        \t\"distance\": 115.5,\n        \t\"message\": [\"\",\"\",\"\",\"es\",\"\",\"\", \"secreto\", \"\", \"alan\"]\n        },\n        {\n        \t\"name\": \"SATO\",\n        \t\"distance\": 142.7,\n        \t\"message\": [\"\",\"este\",\"\",\"un\",\"\", \"\", \"de\", \"\"]\n        }\n    ]\n}"
+				},
+				"url": {
+					"raw": "{{host}}/api/ml-back/topsecret",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"ml-back",
+						"topsecret"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Top Secret Split",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "api-key",
+						"value": "{{ml_api_key}}",
+						"type": "text"
+					},
+					{
+						"key": "authentication",
+						"value": "{{ml_auth}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"distance\": 142.7,\n        \t\"message\": [\"\",\"este\",\"\",\"un\",\"\", \"\", \"de\", \"\"]\n}"
+				},
+				"url": {
+					"raw": "{{host}}/api/ml-back/topsecret_split/kenobi",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"ml-back",
+						"topsecret_split",
+						"kenobi"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
