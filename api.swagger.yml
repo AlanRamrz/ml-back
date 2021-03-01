@@ -1,0 +1,205 @@
+swagger: "2.0"
+info:
+  description: "This is a sample server for Meli challenge"
+  version: "1.0.0"
+  title: "Mercado Libre Challenge"
+  contact:
+    email: "alan.ramrzt@gmail.com"
+host: "ml-back-qdqdyxua6q-uc.a.run.app"
+basePath: "/api/ml-back"
+tags:
+- name: "Health"
+  description: "App healthcheck"
+- name: "Cache"
+  description: "Cache management"
+- name: "Top secret"
+  description: "Operations about satellite position and message processing"
+schemes:
+- "https"
+paths:
+  /healthcheck:
+    get:
+      tags:
+      - "Health"
+      summary: "Check app status"
+      responses:
+        "200":
+          description: "OK"
+  /cache:
+    get:
+      tags:
+      - "Cache"
+      summary: "Get app cache data from satellites received messages"
+      produces:
+      - "application/json"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            $ref: "#/definitions/CacheResponse"
+        "401":
+          description: "Invalid credentials"
+      security:
+      - api-key: []
+      - authentication: []
+    delete:
+      tags:
+      - "Cache"
+      summary: "Delete app cache data from satellites received messages"
+      responses:
+        "204":
+          description: "No Content"
+        "401":
+          description: "Invalid credentials"
+      security:
+      - api-key: []
+      - authentication: []
+  /topsecret:
+    post:
+      tags:
+      - "Top secret"
+      summary: "Send message and distance to Kenobi, Skywalker and Sato and computes message and positions if possible"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Satellites information"
+        required: true
+        schema:
+          $ref: "#/definitions/TopSecretRequest"
+      responses:
+        "200":
+          description: "Returns message and possible positions x, y"
+          schema:
+            $ref: "#/definitions/TopSecretResponse"
+        "400":
+          description: "Validation error"
+        "401":
+          description: "Invalid credentials"
+      security:
+      - api-key: []
+      - authentication: []
+  /topsecret_split:
+    get:
+      tags:
+      - "Top secret"
+      summary: "Computes message and positions if possible"
+      produces:
+      - "application/json"
+      responses:
+        "200":
+          description: "Returns message and possible positions x, y if possible."
+          schema:
+            $ref: "#/definitions/TopSecretResponse"
+        "404":
+          description: "Not Found message because not enough information provided"
+        "401":
+          description: "Invalid credentials"
+      security:
+      - api-key: []
+      - authentication: []
+  /topsecret_split/{satelliteName}:
+    post:
+      tags:
+      - "Top secret"
+      summary: "Send message and distance to provided satelliteName"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Satellite information"
+        required: true
+        schema:
+          $ref: "#/definitions/TopSecretSplitSatelliteRequest"
+      - in: "path"
+        name: satelliteName
+        required: true
+        type: string
+      responses:
+        "201":
+          description: "Returns satellites information received and saved in cache"
+          schema:
+            $ref: "#/definitions/CacheResponse"
+        "400":
+          description: "Validation error"
+        "401":
+          description: "Invalid credentials"
+      security:
+      - api-key: []
+      - authentication: []
+securityDefinitions:
+  api-key:
+    type: "apiKey"
+    name: "api-key"
+    in: "header"
+  authentication:
+    type: "apiKey"
+    name: "authentication"
+    in: "header"
+definitions:
+  TopSecretSplitSatelliteRequest:
+    type: "object"
+    properties:
+      distance:
+        type: "number"
+      message:
+        type: "array"
+        items:
+          type: "string"
+  TopSecretSatelliteRequest:
+    type: "object"
+    properties:
+      name:
+        type: "string"
+      distance:
+        type: "number"
+      message:
+        type: "array"
+        items:
+          type: "string"
+  TopSecretRequest:
+    type: "object"
+    properties:
+      satellites:
+        type: "array"
+        items:
+          $ref: "#/definitions/TopSecretSatelliteRequest"
+  TopSecretResponse:
+    type: "object"
+    properties:
+      message:
+        type: "string"
+      position:
+        type: "array"
+        items:
+          type: "string"
+  CacheResponse:
+    type: "object"
+    properties:
+      KENOBI_DATA:
+        type: "object"
+        properties:
+          distance:
+            type: number
+          message:
+            type: "array"
+            items:
+              type: "string"
+      SKYWALKER_DATA:
+        type: "object"
+        properties:
+          distance:
+            type: number
+          message:
+            type: "array"
+            items:
+              type: "string"
+externalDocs:
+  description: "Find out more about Swagger"
+  url: "http://swagger.io"
